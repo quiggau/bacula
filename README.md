@@ -29,7 +29,7 @@ Each invocation creates a log file with all the generated output.
 * sqlite3: https://www.sqlite.org/2018/sqlite-autoconf-3240000.tar.gz
 * openssl: https://www.openssl.org/source/old/1.0.2/openssl-1.0.2e.tar.gz
 * zlib: http://zlib.net/zlib-1.2.11.tar.gz
-* bacula: http://git.bacula.org/bacula.git
+* bacula: https://sourceforge.net/projects/bacula/files/bacula/9.2.1/bacula-9.2.1.tar.gz
 
 <sub>**Disclaimer**</sub>
 
