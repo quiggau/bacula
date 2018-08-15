@@ -1,6 +1,6 @@
 # bacula
 This is a set of scripts to package a DroboApp from scratch, i.e., download sources, unpackage, compile, install, and package in a TGZ file. The `master` branch contains the DroboFS version.
-This set of scripts is based of the original droboports(https://github.com/droboports) created by Ricardo Padilha.
+This set of scripts is based of the original [droboports](https://github.com/droboports) created by Ricardo Padilha.
 
 ## I just want to install the DroboApp, what do I do?
 
