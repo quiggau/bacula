@@ -19,7 +19,6 @@ _build_openssl() {
 local VERSION="1.0.2e"
 local FOLDER="openssl-${VERSION}"
 local FILE="${FOLDER}.tar.gz"
-#local URL="http://mirror.switch.ch/ftp/mirror/openssl/source/old/1.0.2/${FILE}"
 local URL="https://www.openssl.org/source/old/1.0.2/${FILE}"
 
 _download_tgz "${FILE}" "${URL}" "${FOLDER}"
@@ -65,23 +64,31 @@ popd
 ### Bacula ###
 _build_bacula() {
 
-local FOLDER="bacula"
+local VERSION="9.2.1"
+local FOLDER="bacula-${VERSION}"
+local FILE="${FOLDER}.tar.gz"
+local URL="https://sourceforge.net/projects/bacula/files/bacula/${VERSION}/${FILE}"
+
+_download_tgz "${FILE}" "${URL}" "${FOLDER}"
 pushd "target/${FOLDER}"
+
 ac_cv_func_setpgrp_void=yes \
 ./configure \
   --host=${HOST} \
   --prefix="${DEST}" \
-  --with-sqlite3="${DEPS}" \
-  --with-logdir=${DEST}/logs 
-
-#  --sbindir=${DEST}/bacula/sbin \
-#  --sysconfdir=${DEST}/bacula/etc \
-#  --with-pid-dir=${DEST}/bacula/var \
-#  --with-subsys-dir=${DEST}/bacula/bin/working \
-#  --with-working-dir=${DEST}/bacula/bin/working \
+  --sbindir="${DEST}/sbin" \
+  --sysconfigdir="${DEST}/etc" \
+  --with-pid-dir="${DEST}/var/run" \
+  --with-subsys-dir="${DEST}/var/run/subsys" \
+  --with-logdir="${DEST}/logs" \
+  --with-archivedir="${DEST}/archive" \
+  --mandir="${DEST}/shared/man" \
+  --with-working-dir="${DEST}/working" \
+  --with-sqlite3="${DEPS}" 
 
 make
 make install
+rm -v "${DEST}/lib"/*.a
 popd
 }
 
