@@ -46,7 +46,7 @@ popd
 }
 
 ### SQLITE3 ###
-_build_sqlite3() {
+_build_sqlite() {
 local VERSION="3240000"
 local FOLDER="sqlite-autoconf-${VERSION}"
 local FILE="${FOLDER}.tar.gz"
@@ -54,10 +54,9 @@ local URL="https://www.sqlite.org/2018/${FILE}"
 
 _download_tgz "${FILE}" "${URL}" "${FOLDER}"
 pushd "target/${FOLDER}"
-./configure --host="${HOST}" --prefix="${DEST}" --libdir="${DEST}/lib"
+./configure --host="${HOST}" --prefix="${DEPS}" --libdir="${DEST}/lib" --disable-static
 make
 make install
-rm -v "${DEST}/lib"/*.a
 popd
 }
 
@@ -77,7 +76,7 @@ ac_cv_func_setpgrp_void=yes \
   --host=${HOST} \
   --prefix="${DEST}" \
   --sbindir="${DEST}/sbin" \
-  --sysconfigdir="${DEST}/etc" \
+  --sysconfdir="${DEST}/etc" \
   --with-pid-dir="${DEST}/var/run" \
   --with-subsys-dir="${DEST}/var/run/subsys" \
   --with-logdir="${DEST}/logs" \
@@ -88,14 +87,13 @@ ac_cv_func_setpgrp_void=yes \
 
 make
 make install
-rm -v "${DEST}/lib"/*.a
 popd
 }
 
 _build() {
   _build_zlib
   _build_openssl
-  _build_sqlite3
+  _build_sqlite
   _build_bacula
   _package
 }
